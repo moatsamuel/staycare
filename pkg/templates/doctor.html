@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+{% block title %}Doctor Page{% endblock %}
+{% block main %}
+    <h1>Doctor Page</h1>
+    <p>Welcome to the Doctor Page!</p>
+    <ul>
+        {% for doc in doctor %}
+        <li>{{ doc.name }} - {{ doc.specialty }} - {{ doc.availability }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
