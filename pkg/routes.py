@@ -4,7 +4,7 @@ from pkg import app
 @app.route("/",methods=["GET","POST"])
 def register_page():
     if request.method == "POST":
-        flash("you have registered sucessfully click on the login button below","success")
+        flash("you have registered successfully click on the login button below","success")
         redirect ("/")
     return render_template("register_page.html")
 

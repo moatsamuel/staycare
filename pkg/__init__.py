@@ -1,5 +1,10 @@
+import os
 from flask import Flask
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = "yyyyyyyyyyy634674368537636579065790530201223-9137t83r531r5"
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+
 from pkg import routes
