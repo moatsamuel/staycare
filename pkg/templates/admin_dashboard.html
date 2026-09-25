@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{% block title %}Admin Page{% endblock %}
+{% block main %}
+    <h1>Admin Page</h1>
+    <p>Welcome to the Admin Page!</p>
+    <ul>
+        {% for doc in doctor %}
+        <li>{{ doc.name }} - {{ doc.specialty }} - {{ doc.availability }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
