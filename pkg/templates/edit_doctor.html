@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% block title %}Edit Doctor Profile{% endblock %}
+{% block main %}
+    <h1>Edit Profile: Dr. {{ doc.first_name }} {{ doc.last_name }}</h1>
+    <hr>
+    
+    <form action="/admin/doctor/edit/{{ doc.id }}" method="POST">
+        First Name: <input type="text" name="first_name" value="{{ doc.first_name }}" required><br><br>
+        Last Name: <input type="text" name="last_name" value="{{ doc.last_name }}" required><br><br>
+        Email: <input type="email" name="email" value="{{ doc.email }}" required><br><br>
+        License: <input type="text" name="licence_number" value="{{ doc.licence_number }}" required><br><br>
+        Consultation Fee: <input type="number" step="0.01" name="consultation_fee" value="{{ doc.consultation_fee }}" required><br><br>
+        Availability: 
+        <select name="availability">
+            <option value="Available" {% if doc.availability == 'Available' %}selected{% endif %}>Available</option>
+            <option value="Not Available" {% if doc.availability == 'Not Available' %}selected{% endif %}>Not Available</option>
+        </select><br><br>
+        Specialty: 
+        <select name="specialty_id" required>
+            {% for spec in specialties %}
+                <option value="{{ spec.id }}" {% if doc.specialty_id == spec.id %}selected{% endif %}>{{ spec.name }}</option>
+            {% endfor %}
+        </select><br><br>
+        
+        <button type="submit">Update Record</button>
+        <a href="/admin/dashboard"><button type="button">Cancel</button></a>
+    </form>
+{% endblock %}

@@ -2,11 +2,61 @@
 
 {% block title %}Admin Page{% endblock %}
 {% block main %}
-    <h1>Admin Page</h1>
-    <p>Welcome to the Admin Page!</p>
-    <ul>
-        {% for doc in doctor %}
-        <li>{{ doc.name }} - {{ doc.specialty }} - {{ doc.availability }}</li>
-        {% endfor %}
-    </ul>
+    <h1>Admin Page - Manage Doctors</h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p><strong>Notice: {{ msg }}</strong></p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <h3>Add New Doctor</h3>
+    <form action="/admin/doctor/add" method="POST">
+        First Name: <input type="text" name="first_name" required><br><br>
+        Last Name: <input type="text" name="last_name" required><br><br>
+        Email: <input type="email" name="email" required><br><br>
+        License: <input type="text" name="licence_number" required><br><br>
+        Fee ($): <input type="number" step="0.01" name="consultation_fee" required><br><br>
+        Specialty: 
+        <select name="specialty_id" required>
+            {% for spec in specialties %}
+                <option value="{{ spec.id }}">{{ spec.name }}</option>
+            {% endfor %}
+        </select><br><br>
+        <button type="submit">Save Doctor</button>
+    </form>
+
+    <h3>Active System Entries</h3>
+    <table border="1" cellpadding="5">
+        <thead>
+            <tr>
+                <th>Doctor Name</th>
+                <th>Specialty</th>
+                <th>License</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            {% for doc in doctors %}
+            <tr>
+                <td>Dr. {{ doc.first_name }} {{ doc.last_name }}</td>
+                <td>{{ doc.specialty.name if doc.specialty else "General Medicine" }}</td>
+                <td>{{ doc.licence_number }}</td>
+                <td>
+                    <a href="/admin/doctor/edit/{{ doc.id }}"><button type="button">Edit</button></a>
+                    
+                    <form action="/admin/doctor/delete/{{ doc.id }}" method="POST" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Delete profile?');">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4">No active records registered in system.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
