@@ -5,7 +5,15 @@
     <p>Welcome to the Doctor Page!</p>
     <ul>
         {% for doc in doctor %}
-        <li>{{ doc.name }} - {{ doc.specialty }} - {{ doc.availability }}</li>
-        {% endfor %}
+            <li style="border: 1px dotted black; border-radius: 8px; margin-bottom: 10px; padding: 10px; list-style-type: none;">
+                <strong>Dr. {{ doc.first_name }} {{ doc.last_name }}</strong><br>
+                Specialty: {{ doc.specialty.name if doc.specialty else "General Medicine" }}<br>
+                Availability: {{ doc.availability if doc.availability else "Available" }}<br>
+                License: {{ doc.licence_number }}
+            </li>
+            {% else %}
+                <li>No doctors are currently registered in the database.</li>
+            {% endfor %}
+        </div>
     </ul>
 {% endblock %}

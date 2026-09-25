@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+{% block title %}Edit Doctor Profile{% endblock %}
+{% block main %}
+    <div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-md border border-slate-100 my-8">
+        <h1 class="text-2xl font-bold text-slate-800 mb-2">Edit Profile: Dr. {{ doc.first_name }} {{ doc.last_name }}</h1>
+        <hr class="border-slate-200 mb-6">
+        
+        <form action="/admin/doctor/edit/{{ doc.id }}" method="POST" class="space-y-5">
+            <!-- Name Row Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-600 mb-1">First Name</label>
+                    <input type="text" name="first_name" value="{{ doc.first_name }}" required 
+                        class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-600 mb-1">Last Name</label>
+                    <input type="text" name="last_name" value="{{ doc.last_name }}" required 
+                        class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                </div>
+            </div>
+
+            <!-- Email & License Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-600 mb-1">Email Address</label>
+                    <input type="email" name="email" value="{{ doc.email }}" required 
+                        class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-600 mb-1">License Number</label>
+                    <input type="text" name="licence_number" value="{{ doc.licence_number }}" required 
+                        class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                </div>
+            </div>
+
+            <!-- Fee & Availability Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-600 mb-1">Consultation Fee ($)</label>
+                    <input type="number" name="consultation_fee" step="0.01" value="{{ doc.consultation_fee }}" required 
+                        class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-600 mb-1">Availability Status</label>
+                    <select name="availability" class="w-full px-3 py-2 border border-slate-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                        <option value="Available" {% if doc.availability == 'Available' %}selected{% endif %}>Available</option>
+                        <option value="Not Available" {% if doc.availability == 'Not Available' %}selected{% endif %}>Not Available</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Specialty Selection -->
+            <div>
+                <label class="block text-sm font-medium text-slate-600 mb-1">Specialty Field</label>
+                <select name="specialty_id" required class="w-full px-3 py-2 border border-slate-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                    {% for spec in specialties %}
+                        <option value="{{ spec.id }}" {% if doc.specialty_id == spec.id %}selected{% endif %}>{{ spec.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Action Form Buttons -->
+            <div class="flex items-center justify-end space-x-3 pt-4 border-t border-slate-100">
+                <a href="/admin/dashboard" class="px-4 py-2 border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition duration-150">
+                    Cancel
+                </a>
+                <button type="submit" class="px-4 py-2 bg-sky-600 text-white font-medium rounded-lg hover:bg-sky-700 shadow-sm transition duration-150">
+                    Update
+                </button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
