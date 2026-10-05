@@ -165,7 +165,7 @@
           Use your hospital email to access the staff portal.
         </p>
 
-        <form action="{{ url_for('patient.pat_login') }}" method="POST" class="mt-10 space-y-7" autocomplete="on">
+        <form action="{{ url_for('admin.admin_login') }}" method="POST" class="mt-10 space-y-7" autocomplete="on">
 
           <div>
             <label for="email" class="field-label">Hospital email</label>
@@ -193,7 +193,7 @@
               required
             >
           </div>
-         <button>Login</button>
+         <button type="submit" class="text-white bg-brand hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-3 py-2 focus:outline-none">Login</button>
 
         </form>
 
