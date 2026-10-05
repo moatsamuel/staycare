@@ -28,7 +28,7 @@
 
                     <!-- FORM -->
                 
-                    <form action="/" method="POST">
+                    <form action="{{url_for('patient.pat_register')}}" method="POST">
 
                             {% with messages= get_flashed_messages()%}
                     {%if messages %}
@@ -44,11 +44,27 @@
                         <div class="mb-5">
 
                             <label class="block text-slate-700 font-medium mb-2">
-                                Full Name
+                                First Name
                             </label>
 
                             <input
                                 type="text"
+                                name = "patfname"
+                                placeholder="Enter your full name"
+                                class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
+                            >
+
+                        </div>
+                        
+                        <div class="mb-5">
+
+                            <label class="block text-slate-700 font-medium mb-2">
+                              last Name
+                            </label>
+
+                            <input
+                                type="text"
+                                name = "patlname"
                                 placeholder="Enter your full name"
                                 class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
                             >
@@ -67,6 +83,7 @@
                             <input
                                 type="email"
                                 placeholder="Enter your email"
+                                name = "patemail"
                                 class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
                             >
 
@@ -75,35 +92,9 @@
 
                         <!-- PHONE -->
 
-                        <div class="mb-5">
-
-                            <label class="block text-slate-700 font-medium mb-2">
-                                Phone Number
-                            </label>
-
-                            <input
-                                type="tel"
-                                placeholder="Enter your phone number"
-                                class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
-                            >
-
-                        </div>
+                       
 
 
-                        <!-- DATE OF BIRTH -->
-
-                        <div class="mb-5">
-
-                            <label class="block text-slate-700 font-medium mb-2">
-                                Date of Birth
-                            </label>
-
-                            <input
-                                type="date"
-                                class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
-                            >
-
-                        </div>
 
 
                         <!-- PASSWORD -->
@@ -116,6 +107,7 @@
 
                             <input
                                 type="password"
+                                name = "patpassword"
                                 placeholder="Create a password"
                                 class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
                             >
@@ -133,6 +125,7 @@
 
                             <input
                                 type="password"
+                                name = "patconfirmpassword"
                                 placeholder="Confirm your password"
                                 class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
                             >

@@ -165,7 +165,7 @@
           Use your hospital email to access the staff portal.
         </p>
 
-        <form class="mt-10 space-y-7" autocomplete="on">
+        <form action="{{ url_for('patient.pat_login') }}" method="POST" class="mt-10 space-y-7" autocomplete="on">
 
           <div>
             <label for="email" class="field-label">Hospital email</label>
@@ -193,10 +193,7 @@
               required
             >
           </div>
-         <a href="patient_dashboard.html"
-   class="bg-sky-600 text-white px-6 py-3 rounded-lg hover:bg-sky-700">
-    Login
-</a>
+         <button>Login</button>
 
         </form>
 
