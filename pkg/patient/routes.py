@@ -43,6 +43,7 @@ def pat_register():
             )
             db.session.add(new_patient)
             db.session.commit()
+            flash("Account created successfully. Please log in.", "success")
             return redirect(url_for("patient.pat_login"))
         except SQLAlchemyError as e:
             db.session.rollback()

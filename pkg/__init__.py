@@ -6,8 +6,9 @@ from pkg.config import DevelopmentConfig
 from pkg.doctor.routes import doc
 from pkg.patient.routes import patient
 from pkg.admin.routes import admin
+from flask_wtf.csrf import CSRFProtect
 
-
+# csrf = CSRFProtect()
 
 load_dotenv()
 
@@ -19,6 +20,7 @@ def create_app():
     app.config.from_object(DevelopmentConfig)
 
     db.init_app(app)
+    # csrf.init_app(app)
 
     app.register_blueprint(patient)
     app.register_blueprint(doc, url_prefix='/doctor/')

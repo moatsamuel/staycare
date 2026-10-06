@@ -166,7 +166,15 @@
         </p>
 
         <form action="{{ url_for('patient.pat_login') }}" method="POST" class="mt-10 space-y-7" autocomplete="on">
-
+          {% with messages= get_flashed_messages()%}
+                    {%if messages %}
+                        <ul style="color:green;">
+                            {%for msg in messages %}
+                            <li>{{msg}}</li>
+                            {%endfor%}
+                        </ul>
+                    {% endif %}
+                {%endwith%}
           <div>
             <label for="email" class="field-label">Hospital email</label>
             <input
