@@ -3,6 +3,13 @@
 {% block title %}Patient Dashboard{% endblock %}
 {% block main %}
     <main class="flex-1 p-6 max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-4 mb-2">
+            <div>
+                <h1 class="text-2xl font-bold tracking-tight text-slate-900">Welcome, {{ patient.first_name }} {{ patient.last_name }}</h1>
+                <p class="text-xs text-slate-500 mt-0.5">Manage your consultations and medical schedules.</p>
+            </div>
+            <span class="bg-blue-50 text-blue-700 text-xs font-semibold px-2.5 py-1 rounded-md border border-blue-200">Patient Dashboard</span>
+        </div>
         
         <div class="lg:col-span-2 space-y-6">
             <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
@@ -76,6 +83,7 @@
                     Create schedule
                 </button>
             </form>
+            <form action="{{url_for('patient.logout')}}" method="POST"><button class="w-full py-3 bg-sky-600 hover:bg-sky-700 text-white text-sm font-bold rounded-xl shadow-md transition-all duration-150 transform active:scale-95">logout</button></form>
         </div>
     </main>
 {% endblock %}

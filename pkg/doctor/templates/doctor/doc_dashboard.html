@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard - MedSuite</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans h-screen flex overflow-hidden">
+
+    <!-- Sidebar Layout Container -->
+    <aside class="w-64 bg-slate-900 text-slate-300 flex flex-col justify-between hidden md:flex">
+        <div>
+            <div class="p-6 text-xl font-bold text-white border-b border-slate-800 tracking-wide">
+                MedSuite Central
+            </div>
+            <nav class="mt-6 px-4 space-y-1">
+                <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg bg-blue-600 text-white transition-colors">
+                    My Appointments
+                </a>
+                <a href="#" class="flex items-center px-4 py-3 text-sm font-medium rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
+                    My Profile
+                </a>
+            </nav>
+        </div>
+        <div class="p-4 border-t border-slate-800">
+            <form action="{{ url_for('doc.logout') }}" method="POST">
+                <button class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-red-400 hover:bg-red-950/30 hover:text-red-300 transition-colors">
+                    Logout
+                </button>
+            </form>
+        </div>
+    </aside>
+
+    <!-- Main Content Panel Wrapper -->
+    <main class="flex-1 flex flex-col overflow-y-auto">
+        <!-- Sticky Top Navigation Header Area -->
+        <header class="bg-white border-b border-slate-200 sticky top-0 z-10 px-8 py-4 flex items-center justify-between">
+            <h1 class="text-2xl font-bold tracking-tight">Welcome, Dr. {{ doctor.first_name }} {{ doctor.last_name }}</h1>
+
+            <span class="bg-emerald-50 text-emerald-700 text-xs font-semibold px-2.5 py-1 rounded-md border border-emerald-200">Practitioner Active</span>
+        </header>
+
+        <!-- Layout Content Grid Boxes Placeholder -->
+        <div class="p-8 max-w-7xl w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <div class="bg-white border border-slate-200 shadow-sm rounded-xl p-6">
+                <h3 class="text-lg font-bold text-slate-900 mb-2">My Appointments</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                    View upcoming client consultations, update patient diagnostics histories, and log check-in metrics.
+                </p>
+            </div>
+
+            <div class="bg-white border border-slate-200 shadow-sm rounded-xl p-6">
+                <h3 class="text-lg font-bold text-slate-900 mb-2">My Profile</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                    Adjust consultation hours availability settings, register specialty categories, and update professional license records.
+                </p>
+            </div>
+
+        </div>
+    </main>
+</body>
+</html>

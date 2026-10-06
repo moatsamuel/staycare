@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stay.Care Hospital — Staff Sign In</title>
+<title>Stay.Care Hospital — Admin Sign In</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,14 +11,14 @@
 
 <style>
   :root{
-    --deep-teal: #0d3b3e;
-    --mid-teal: #1c6b70;
-    --panel-teal: #12474a;
+    --deep-teal: #1c4fcf;
+    --mid-teal: #03558c;
+    --panel-teal: #1b3ad5;
     --mist: #eef5f4;
-    --ink: #10292b;
-    --slate: #5c7a7c;
+    --ink: #253ce9;
+    --slate: #133ebd;
     --line: #d7e4e2;
-    --focus: #2f8f8a;
+    --focus: #1717e0;
   }
 
   html, body{
@@ -38,7 +38,7 @@
 
  .brand-photo{
   background-image:
-    linear-gradient(160deg, rgba(9, 41, 43, 0.72) 0%, rgba(13, 59, 62, 0.55) 45%, rgba(20, 90, 92, 0.35) 100%),
+    linear-gradient(160deg, rgba(38, 96, 219, 0.72) 0%, rgba(45, 74, 238, 0.55) 45%, rgba(22, 64, 218, 0.35) 100%),
     url('images/backlogin.jpeg');
   background-size: cover;
   background-position: center;
@@ -130,7 +130,7 @@
 
       <div class="max-w-sm">
         <p class="display text-4xl xl:text-[2.75rem] leading-[1.12] font-medium">
-          One team, One system, Better care.<br>Welcome to Stay.Care Hospital login page.
+          One team, One system, Better care.<br>Welcome to Stay.Care Admin login page.
         </p>
         
         <p class="mt-5 text-white/75 text-[0.95rem] leading-relaxed">
@@ -165,13 +165,13 @@
           Use your hospital email to access the staff portal.
         </p>
 
-        <form class="mt-10 space-y-7" autocomplete="on">
+        <form action="{{ url_for('admin.admin_login') }}" method="POST" class="mt-10 space-y-7" autocomplete="on">
 
           <div>
             <label for="email" class="field-label">Hospital email</label>
             <input
               id="email"
-              name="email"
+              name="admin_email"
               type="email"
               class="field-input"
               placeholder="j.rivera@staycare.org"
@@ -186,17 +186,14 @@
             </div>
             <input
               id="password"
-              name="password"
+              name="admin_password"
               type="password"
               class="field-input"
               placeholder="••••••••••"
               required
             >
           </div>
-         <a href="patient_dashboard.html"
-   class="bg-sky-600 text-white px-6 py-3 rounded-lg hover:bg-sky-700">
-    Login
-</a>
+         <button type="submit" class="text-white bg-brand hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-3 py-2 focus:outline-none">Login</button>
 
         </form>
 

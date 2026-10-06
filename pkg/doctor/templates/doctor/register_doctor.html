@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Doctor - MedSuite Admin</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans min-h-screen flex items-center justify-center p-6">
+
+    <div class="w-full max-w-xl bg-white border border-slate-200 rounded-2xl shadow-sm p-8">
+        <div class="mb-6">
+            <h1 class="text-2xl font-bold tracking-tight">Register New Doctor</h1>
+            <p class="text-sm text-slate-500 mt-1">Establish credentials and profiles for medical practitioners.</p>
+        </div>
+
+        {% if error %}
+        <div class="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 rounded-lg text-sm">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <form action="{{ url_for('doc.register_doctor') }}" method="POST" class="space-y-5" autocomplete="off">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">First Name</label>
+                    <input type="text" name="first_name" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition-all">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Last Name</label>
+                    <input type="text" name="last_name" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition-all">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Hospital Email Address</label>
+                <input type="email" name="email" required placeholder="dr.name@staycare.com" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition-all">
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Medical Specialty</label>
+                <select name="specialty_id" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition-all">
+                    <option value="" disabled selected>Choose a specialty...</option>
+                    {% for spec in specialties %}
+                        <option value="{{ spec.id }}">{{ spec.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Medical Licence Number</label>
+                <input type="text" name="licence_number" placeholder="LIC-987654" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition-all">
+            </div>
+            
+            <div>
+                <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Phone Number</label>
+                <input type="text" name="phone_number" placeholder="123-456-7890" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition-all">
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Temporary Login Password</label>
+                <input type="password" name="password" required placeholder="••••••••" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition-all">
+            </div>
+
+            <div class="pt-4 flex items-center justify-end gap-3">
+                <a href="/doc/dashboard" class="px-4 py-2.5 border border-slate-200 rounded-lg text-sm text-slate-600 hover:bg-slate-50 font-medium transition-colors">Cancel</a>
+                <button type="submit" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold shadow-sm transition-colors">
+                    Register Account
+                </button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

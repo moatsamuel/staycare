@@ -162,11 +162,19 @@
 
         <h1 class="display text-[1.9rem] leading-tight text-[color:var(--ink)]">Sign in to your account</h1>
         <p class="mt-2 text-[0.92rem] text-[color:var(--slate)]">
-          Use your hospital email to access the staff portal.
+          Use your hospital email to access the Patient portal.
         </p>
 
-        <form class="mt-10 space-y-7" autocomplete="on">
-
+        <form action="{{ url_for('patient.pat_login') }}" method="POST" class="mt-10 space-y-7" autocomplete="on">
+          {% with messages= get_flashed_messages()%}
+                    {%if messages %}
+                        <ul style="color:green;">
+                            {%for msg in messages %}
+                            <li>{{msg}}</li>
+                            {%endfor%}
+                        </ul>
+                    {% endif %}
+                {%endwith%}
           <div>
             <label for="email" class="field-label">Hospital email</label>
             <input
@@ -193,10 +201,7 @@
               required
             >
           </div>
-         <a href="patient_dashboard.html"
-   class="bg-sky-600 text-white px-6 py-3 rounded-lg hover:bg-sky-700">
-    Login
-</a>
+         <button>Login</button>
 
         </form>
 
