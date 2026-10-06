@@ -8,6 +8,7 @@ from pkg.patient.routes import patient
 from pkg.admin.routes import admin
 
 
+
 load_dotenv()
 
 def create_app():

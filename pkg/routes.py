@@ -79,7 +79,7 @@ def admin_add_doctor():
     except Exception:
         db.session.rollback()
         flash("Invalid information submitted.", "danger")
-    return redirect(url_for("admin_dashboard"))
+    return redirect(url_for("admin/admin_dashboard"))
 
 
 
