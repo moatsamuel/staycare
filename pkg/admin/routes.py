@@ -54,3 +54,58 @@ def admin_login():
 def admin_logout():
     session.pop('admin_id', None)
     return redirect(url_for('admin.admin_login'))
+
+@admin.route("/doctor/edit/<int:doctor_id>", methods=["GET", "POST"])
+def admin_edit_doctor(doctor_id):
+    if 'admin_id' not in session:
+        return redirect(url_for('admin.admin_login'))
+    target_doctor = Doctor.query.get_or_404(doctor_id)
+    
+    if request.method == "POST":
+        target_doctor.first_name = request.form.get("first_name")
+        target_doctor.last_name = request.form.get("last_name")
+        target_doctor.email = request.form.get("email")
+        target_doctor.licence_number = request.form.get("licence_number")
+        target_doctor.consultation_fee = request.form.get("consultation_fee")
+        target_doctor.availability = request.form.get("availability")
+        target_doctor.specialty_id = int(request.form.get("specialty_id"))
+        
+        try:
+            db.session.commit()
+            flash("Doctor updated successfully.", "success")
+            return redirect(url_for("admin/admin_dashboard"))
+        except Exception:
+            db.session.rollback()
+            flash("Invalid information submitted.", "danger")
+            return redirect(url_for("admin/admin_dashboard"))
+            
+    all_specialties = Specialty.query.all()
+    
+    response= make_response( render_template("admin/edit_doctor.html", doc=target_doctor, specialties=all_specialties))
+    response.headers["Cache-Control"] = "no-store,no-cache, must-revalidate,"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    return response
+
+@admin.route("/doctor/delete/<int:doctor_id>", methods=["POST"])
+def admin_delete_doctor(doctor_id):
+    if 'admin_id' not in session:
+        return redirect(url_for('admin.admin_login'))
+    target_doctor = Doctor.query.get(doctor_id)
+    if not target_doctor:
+        flash("Doctor not found.", "danger")
+        return redirect(url_for("admin/admin_dashboard"))
+        
+    try:
+        db.session.delete(target_doctor)
+        db.session.commit()
+        flash("Doctor deleted successfully.", "success")
+    except Exception:
+        db.session.rollback()
+        flash("Could not complete delete operation due to database constraints.", "danger")
+        
+    response= make_response( redirect(url_for("admin/admin_dashboard")))
+    response.headers["Cache-Control"] = "no-store,no-cache, must-revalidate,"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    return response
